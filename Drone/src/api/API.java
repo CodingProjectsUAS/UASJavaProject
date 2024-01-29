@@ -3,6 +3,8 @@ package api;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -76,9 +78,11 @@ public class API {
 	    
 
 	//fetches the data from https://dronesim.facets-labs.com/api/drones/
-	public static void getDrones() {
+	public static String[] getDrones() { 
 	    ApiUrl = "https://dronesim.facets-labs.com/api/drones/?format=json";
 	    int page = 1;
+	    String[] droneListID = new String[25];
+	    		
 	    while(true) {
 		    try {
 		        URL urlObj = new URL(ApiUrl);
@@ -103,7 +107,7 @@ public class API {
 		            ResultListDrones drones = mapper.readValue(jsonString, ResultListDrones.class);
 		            System.out.println("page " + page);
 		            System.out.println();
-	
+		            int i = 0;
 		            for (DroneDetails drone : drones.getResults()) {
 		                System.out.println("ID: " + drone.getId());
 		                System.out.println("Dronetype: " + drone.getDronetype());
@@ -112,12 +116,14 @@ public class API {
 		                System.out.println("Carriage Weight: " + drone.getCarriage_weight());
 		                System.out.println("Carriage Type: " + drone.getCarriage_type());
 		                System.out.println();
+		                droneListID[i] = Integer.toString(drone.getId());
+		                i++;
 		            }
 		            if (drones.getNext() != null) {
 	                    String nextPageUrl = drones.getNext();
 	                    page++;
 	                    ApiUrl = nextPageUrl;
-	                } 
+	                }
                 else {
                     break;  // No more pages, exit the loop
                 }
@@ -132,6 +138,7 @@ public class API {
 	        e.printStackTrace();
 	    	}
 	    }
+		return droneListID;
 	}
 
 	

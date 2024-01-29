@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
 import javax.swing.border.LineBorder;
 
 import org.jxmapviewer.JXMapKit;
@@ -23,7 +25,49 @@ import org.jxmapviewer.viewer.WaypointPainter;
 
 
 public class droneMenu extends javax.swing.JFrame {
-
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList<String> List2;
+    private javax.swing.JScrollPane List2panel;
+    private javax.swing.JPanel Menu;
+    private javax.swing.JLabel alignPitch;
+    private javax.swing.JLabel alignRoll;
+    private javax.swing.JLabel alignYaw;
+    private javax.swing.JLabel apShown;
+    private javax.swing.JLabel arShown;
+    private javax.swing.JLabel ayShown;
+    private javax.swing.JLabel backGround;
+    private javax.swing.JPanel backgroundPanel;
+    private javax.swing.JLabel batteryStatus;
+    private javax.swing.JLabel bsShown;
+    private javax.swing.JPanel categoriesPanel;
+    private javax.swing.JLabel dCata;
+    private javax.swing.JLabel dMap;
+    private javax.swing.JPanel droneCat;
+    private javax.swing.JPanel droneMap;
+    private javax.swing.JLabel dronePic;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel laShown;
+    private javax.swing.JLabel lastSeen;
+    private javax.swing.JLabel latitude;
+    private javax.swing.JLabel longitude;
+    private javax.swing.JLabel lsShown;
+    private javax.swing.JLabel ltShown;
+    private javax.swing.JLabel map;
+    private javax.swing.JPanel mapPanel;
+    private javax.swing.JLabel searCh;
+    private javax.swing.JPanel search;
+    private javax.swing.JPanel sideBar;
+    private javax.swing.JLabel speed;
+    private javax.swing.JLabel speedShown;
+    private javax.swing.JLabel status;
+    private javax.swing.JLabel statusShown;
+    private javax.swing.JLabel time;
+    private javax.swing.JLabel timeShown;
+    // End of variables declaration//GEN-END:variables
     private JXMapKit mapKit;
     private Timer timer;
     private SimpleDateFormat st;
@@ -248,8 +292,10 @@ public class droneMenu extends javax.swing.JFrame {
         List2.setBackground(new java.awt.Color(153, 153, 153));
         List2.setBorder(new javax.swing.border.MatteBorder(null));
         List2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        String[] droneListIDs;
+    	droneListIDs = api.API.getDrones();
         List2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = droneListIDs;
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -503,8 +549,15 @@ public class droneMenu extends javax.swing.JFrame {
 
     public static void main(String args[]) {
     	System.out.println("API HAS STARTED");
-    	api.API.getDroneTypes();
-        try {
+    	
+    	//api.API.getDroneTypes();
+    	//API apiInstance = new API();
+    	//apiInstance.getDrones();
+    	//ArrayList<Integer> droneListIDs = new ArrayList<Integer>();
+    	//droneListIDs = api.API.getDrones();
+        //List<DroneDetails> drones = apiInstance.getDrones();
+    	
+    	try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
                     UIManager.setLookAndFeel(info.getClassName());
@@ -518,50 +571,4 @@ public class droneMenu extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(() -> new droneMenu().setVisible(true));
     }
-    
-    
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList<String> List2;
-    private javax.swing.JScrollPane List2panel;
-    private javax.swing.JPanel Menu;
-    private javax.swing.JLabel alignPitch;
-    private javax.swing.JLabel alignRoll;
-    private javax.swing.JLabel alignYaw;
-    private javax.swing.JLabel apShown;
-    private javax.swing.JLabel arShown;
-    private javax.swing.JLabel ayShown;
-    private javax.swing.JLabel backGround;
-    private javax.swing.JPanel backgroundPanel;
-    private javax.swing.JLabel batteryStatus;
-    private javax.swing.JLabel bsShown;
-    private javax.swing.JPanel categoriesPanel;
-    private javax.swing.JLabel dCata;
-    private javax.swing.JLabel dMap;
-    private javax.swing.JPanel droneCat;
-    private javax.swing.JPanel droneMap;
-    private javax.swing.JLabel dronePic;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JDialog jDialog1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel laShown;
-    private javax.swing.JLabel lastSeen;
-    private javax.swing.JLabel latitude;
-    private javax.swing.JLabel longitude;
-    private javax.swing.JLabel lsShown;
-    private javax.swing.JLabel ltShown;
-    private javax.swing.JLabel map;
-    private javax.swing.JPanel mapPanel;
-    private javax.swing.JLabel searCh;
-    private javax.swing.JPanel search;
-    private javax.swing.JPanel sideBar;
-    private javax.swing.JLabel speed;
-    private javax.swing.JLabel speedShown;
-    private javax.swing.JLabel status;
-    private javax.swing.JLabel statusShown;
-    private javax.swing.JLabel time;
-    private javax.swing.JLabel timeShown;
-    // End of variables declaration//GEN-END:variables
 }

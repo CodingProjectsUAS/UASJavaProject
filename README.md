@@ -30,6 +30,8 @@ Push code from local repo to remote repo:
 - under got repositories rightclick your Branch
 - push branch -> preview -> login -> push -> login again if neccessary
 
+Committed the fixed Listed in the GUI
+
 Create Pull request (also send the new branch/changes to review):
 - login to your github and go to the repo
 - select your branch -> new pull request
