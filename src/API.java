@@ -1,10 +1,7 @@
-package api;
 
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,7 +18,7 @@ public class API {
 	private static String TOKEN = "Token a0991589b565ef2c5ea95efb50f050b22fca2145";
 	private static String ApiUrl;
 	
-	public static void getDroneDynamics() {
+	static void getDroneDynamics() {
 		ApiUrl = "https://dronesim.facets-labs.com/api/dronedynamics/?format=json";
 	    int page = 1;
 		    try {
@@ -78,11 +75,9 @@ public class API {
 	    
 
 	//fetches the data from https://dronesim.facets-labs.com/api/drones/
-	public static String[] getDrones() { 
+	static void getDrones() {
 	    ApiUrl = "https://dronesim.facets-labs.com/api/drones/?format=json";
 	    int page = 1;
-	    String[] droneListID = new String[25];
-	    		
 	    while(true) {
 		    try {
 		        URL urlObj = new URL(ApiUrl);
@@ -107,7 +102,7 @@ public class API {
 		            ResultListDrones drones = mapper.readValue(jsonString, ResultListDrones.class);
 		            System.out.println("page " + page);
 		            System.out.println();
-		            int i = 0;
+	
 		            for (DroneDetails drone : drones.getResults()) {
 		                System.out.println("ID: " + drone.getId());
 		                System.out.println("Dronetype: " + drone.getDronetype());
@@ -116,14 +111,12 @@ public class API {
 		                System.out.println("Carriage Weight: " + drone.getCarriage_weight());
 		                System.out.println("Carriage Type: " + drone.getCarriage_type());
 		                System.out.println();
-		                droneListID[i] = Integer.toString(drone.getId());
-		                i++;
 		            }
 		            if (drones.getNext() != null) {
 	                    String nextPageUrl = drones.getNext();
 	                    page++;
 	                    ApiUrl = nextPageUrl;
-	                }
+	                } 
                 else {
                     break;  // No more pages, exit the loop
                 }
@@ -138,13 +131,12 @@ public class API {
 	        e.printStackTrace();
 	    	}
 	    }
-		return droneListID;
 	}
 
 	
 	
 	//fetches the data from https://dronesim.facets-labs.com/api/dronetypes/
-	public static void getDroneTypes() {
+	static void getDroneTypes() {
 		ApiUrl = "https://dronesim.facets-labs.com/api/dronetypes/?format=json";
 		DroneTypes myDrone = new DroneTypes();
 		int page = 1;
@@ -215,8 +207,7 @@ public class API {
 		}
 	}
 	
-}
-	/* public static void main(String[] args) {
+	public static void main(String[] args) {
 		System.out.println("API HAS STARTED");
 		int nm = 1;
 		if (nm == 1) {
@@ -229,4 +220,4 @@ public class API {
 			getDroneDynamics();
 		}
 	}
-} */
+}
